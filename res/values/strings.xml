@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CrimeIntent</string>
+    <string name="crime_list_title_textview">Crime_title</string>
+    <string name="crime_list_title_dateview">Crime_date</string>
+    
+    
+    <string name="action_settings">Settings</string>
+    <string name="crime_title">Title</string>
+
+    <string name="crimes_title">Crimes</string>
+    <string name="edit_crime_title">Enter the crime you found!</string>
+    <string name="crime_details">Details</string>
+    <string name="solved_label">solved?</string>
+    <string name="title_activity_crime_list">CrimeListActivity</string>
+
+</resources>
