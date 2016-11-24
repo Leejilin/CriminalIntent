@@ -5,14 +5,19 @@ import java.util.Date;
 import java.util.UUID;
 import com.example.crimeintent.R.id;
 import com.example.crimeintent.R.string;
+
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.NavUtils;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -56,11 +61,22 @@ public class CrimeFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
 		//UUID CrimeId=(UUID)getActivity().getIntent().getSerializableExtra(EXTRA_CRIME_ID);
 		UUID CrimeId = (UUID)getArguments().getSerializable(EXTRA_CRIME_ID) ;
 		mCrime=CrimeLab.get(getActivity()).getCrime(CrimeId);
 	}
-	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()){
+		case android.R.id.home :
+			if(NavUtils.getParentActivityName(getActivity())!=null)
+				NavUtils.navigateUpFromSameTask(getActivity());
+			return true;		
+		default :
+			return super.onOptionsItemSelected(item);
+		}
+	}
 	public static CrimeFragment newInstance(UUID id){
 		Bundle arguments = new Bundle();
 		arguments.putSerializable(EXTRA_CRIME_ID, id);
@@ -68,10 +84,15 @@ public class CrimeFragment extends Fragment {
 		mCrimeFragment.setArguments(arguments);
 		return mCrimeFragment;
 	}
+	@TargetApi(11)
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		View v = inflater.inflate(R.layout.fragment_crime, container,false); 
+		if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB)
+			if(NavUtils.getParentActivityIntent(getActivity())!=null)
+				getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+			getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
 		//Date-Button display date
 		mTitleField=(EditText)v.findViewById(R.id.Edit_Crime_Title);
 		mTitleField.setText(mCrime.getTitle());
@@ -132,4 +153,5 @@ public class CrimeFragment extends Fragment {
 		//super.onActivityResult(requestCode, resultCode, data);
 		//getActivity().setResult(Activity.RESULT_OK,null);
 	}
+	
 }

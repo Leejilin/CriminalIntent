@@ -4,9 +4,13 @@ package com.example.crimeintent;
 
 import java.util.ArrayList;
 import android.support.v4.app.ListFragment;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -22,6 +26,8 @@ public class CrimeListFragment extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
+		//通知fragmentManager对于这个fragment调用onCreateOptionsMenu（）和相关方法来填充“操作菜单”
 		getActivity().setTitle(R.string.crimes_title);
 		mCrimes=CrimeLab.get(getActivity()).getCrimes();
 /*		ArrayAdapter<Crime> adapter = new ArrayAdapter<Crime>(this.getActivity(),
@@ -97,4 +103,35 @@ public class CrimeListFragment extends ListFragment {
 			//
 		}
 	}
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		// TODO Auto-generated method stub
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.fragment_crime_list, menu);
+		
+	}
+	@TargetApi(11)
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch(item.getItemId()){
+		case R.id.menu_item_new_crime:
+			Crime crime = new Crime();
+			CrimeLab.get(getActivity()).addCrime(crime);
+			Intent i = new Intent(getActivity(),CrimePagerActivity.class);
+			i.putExtra(CrimeFragment.EXTRA_CRIME_ID, crime.getId());
+			startActivity(i);
+			return true;
+		case R.id.menu_item_show_subtitle:
+			if(getActivity().getActionBar().getSubtitle()==null)
+			{	getActivity().getActionBar().setSubtitle(R.string.subtitle);
+				item.setTitle(R.string.hide_subtitle);
+				}else{
+					getActivity().getActionBar().setSubtitle(null);
+					item.setTitle(R.string.subtitle);
+				}
+		default:	
+			return super.onOptionsItemSelected(item);
+	}
+		}
 }

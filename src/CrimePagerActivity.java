@@ -26,10 +26,10 @@ public class CrimePagerActivity extends FragmentActivity {
 		mCrimes = CrimeLab.get(this).getCrimes();
 		
 		FragmentManager fm = getSupportFragmentManager();
-		int pos=(int)getIntent().getIntExtra(PAGER, 0);
+/*		int pos=(int)getIntent().getIntExtra(PAGER, 0);
 		String title="";
 		title=mCrimes.get(pos).getTitle();		
-		setTitle(title.toString());
+		setTitle(title.toString());*/
 		mViewPager.setAdapter(new FragmentStatePagerAdapter(fm) {
 			
 			@Override

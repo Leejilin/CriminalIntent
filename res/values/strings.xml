@@ -14,5 +14,12 @@
     <string name="crime_details">Details</string>
     <string name="solved_label">solved?</string>
     <string name="title_activity_crime_list">CrimeListActivity</string>
+    
+    <string name="new_crime">New Crime</string>
+	<string name="show_subtitle">Show Subtitle</string>
+	<string name="hide_subtitle">Hide Subtitle</string>
+	<string name="subtitle">Subtitle</string>
+	<string name="delete_crime">Delete</string>
 
+	
 </resources>
