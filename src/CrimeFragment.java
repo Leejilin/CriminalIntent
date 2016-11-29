@@ -4,8 +4,6 @@ package com.example.crimeintent;
 import java.util.Date;
 import java.util.UUID;
 import com.example.crimeintent.R.id;
-import com.example.crimeintent.R.string;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.support.v4.app.FragmentManager;
@@ -25,6 +23,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class CrimeFragment extends Fragment {
 	public static final String EXTRA_CRIME_ID="criminalintent.crime.id";
@@ -68,6 +67,7 @@ public class CrimeFragment extends Fragment {
 	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		//fragment will reseive a callback-request from onOptionsItemSelected()
 		switch(item.getItemId()){
 		case android.R.id.home :
 			if(NavUtils.getParentActivityName(getActivity())!=null)
@@ -152,6 +152,13 @@ public class CrimeFragment extends Fragment {
 		}
 		//super.onActivityResult(requestCode, resultCode, data);
 		//getActivity().setResult(Activity.RESULT_OK,null);
+	}
+	@Override
+	public void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		CrimeLab.get(getActivity()).saveCrimes();
+		Toast.makeText(getActivity(), R.string.success_write_to_disk, Toast.LENGTH_SHORT).show();
 	}
 	
 }

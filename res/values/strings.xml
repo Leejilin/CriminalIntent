@@ -20,6 +20,6 @@
 	<string name="hide_subtitle">Hide Subtitle</string>
 	<string name="subtitle">Subtitle</string>
 	<string name="delete_crime">Delete</string>
-
-	
+	<string name="success_write_to_disk">success_write_to_disk</string>
+	<string name="success_open_the_file">success_open_the_file</string>
 </resources>
